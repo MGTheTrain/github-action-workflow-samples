@@ -8,12 +8,16 @@ struct HelloWorldResponse {
     message: String,
 }
 
+fn get_hello_world_message() -> HelloWorldResponse {
+    HelloWorldResponse {
+        message: String::from("Hello from Rust"),
+    }
+}
+
 #[get("/api/v1/hws")]
 async fn hello() -> Result<impl Responder> {
-    let obj = HelloWorldResponse {
-        message: String::from("Hello from Rust"),
-    };
-    info!("Hi");
+    let obj = get_hello_world_message();
+    info!("Hello from Rust");
     Ok(web::Json(obj))
 }
 
@@ -28,4 +32,15 @@ async fn main() -> std::io::Result<()> {
     .bind(("0.0.0.0", 80))? // Listening on all available network interfaces or addresses on the machine
     .run()
     .await
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_hello_world_message() {
+        let response = get_hello_world_message();
+        assert_eq!(response.message, "Hello from Rust");
+    }
 }
