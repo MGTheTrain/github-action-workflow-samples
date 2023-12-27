@@ -26,6 +26,10 @@ jobs:
           pip install pytest pytest-cov 
           python -m pytest -s test --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
         working-directory: ./backend-services/python/hello-world-service
+      - name: List folders and files
+        run: |
+          ls -al
+        working-directory: ./backend-services/python/hello-world-service
       - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
         uses: snyk/actions/python@master
         env:
