@@ -18,18 +18,10 @@ jobs:
         run: |
           cargo test
         working-directory: ./backend-services/rust/hello-world-service
-      - name: Install Snyk for Rust scans
+      - name: Run cargo-audit to check for vulnerabilities in the source code 🔍/🛡️
         run: |
-          sudo apt-get install -y curl
-          sudo curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
-          sudo chmod +x ./snyk
-          sudo mv ./snyk /usr/local/bin/
-      - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
-        env: 
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: |
-          cargo build
-          snyk code test --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+          cargo install cargo-audit
+          cargo audit
         working-directory: ./backend-services/rust/hello-world-service
       - name: Set up QEMU 
         uses: docker/setup-qemu-action@v3
@@ -44,10 +36,12 @@ jobs:
         run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/rust-hello-world-service:stable .
         working-directory: ./backend-services/rust/hello-world-service
       - name: Run Snyk to check Docker image 🐳/📦 for vulnerabilities 🔍/🛡️
+        uses: snyk/actions/docker@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: |
-          snyk container test ${{ secrets.REGISTRY_LOGIN_SERVER }}/rust-hello-world-service:stable --severity-threshold=high --sarif-file-output=snyk.sarif
+        with:
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/rust-hello-world-service:stable
+          args: --severity-threshold=high --sarif-file-output=snyk.sarif
       - name: Push docker image 🐳/📦
         run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/rust-hello-world-service:stable
       # - name: Upload Snyk report as sarif 🐳/📦
