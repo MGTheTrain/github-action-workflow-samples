@@ -19,7 +19,7 @@ jobs:
       - name: Go test
         run: go test
         working-directory: ./backend-services/go/hello-world-service/test
-      - name: Run Snyk to check for vulnerabilities
+      - name: Run Snyk to check for vulnerabilities in the source code
         uses: snyk/actions/golang@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -35,9 +35,17 @@ jobs:
           registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build and push dockerized Go Gin sample service to an Azure Container Regsitry
+      - name: Build docker image
         uses: docker/build-push-action@v5
         with:
           context: ./backend-services/go/hello-world-service/src
-          push: true
+          # push: true
           tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable
+      - name: Run Snyk to check Docker image for vulnerabilities
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable
+      - name: Push docker image to an Azure Container Registry (ACR)
+        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable
