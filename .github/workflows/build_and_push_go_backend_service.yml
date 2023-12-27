@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build docker image 🐳/📦
         run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable .
-        working-directory: ./backend-services/go/hello-world-service/src/Dockerfile
+        working-directory: ./backend-services/go/hello-world-service/src
       - name: Run Snyk to check Docker image 🐳 for vulnerabilities
         uses: snyk/actions/docker@master
         env:
