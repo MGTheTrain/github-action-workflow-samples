@@ -15,7 +15,7 @@ jobs:
           dotnet-version: '6.0.x'
       - name: Test with the dotnet CLI
         run: dotnet test    
-        working-directory: ./backend-services/c#/src/HelloWorldService
+        working-directory: ./backend-services/c#/test/HelloWorldService
       - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
         uses: snyk/actions/dotnet@master
         env:
