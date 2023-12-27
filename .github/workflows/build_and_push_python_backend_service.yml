@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci-ct-job-for-rust-fast-api-services:
+  ci-ct-job-for-rust-actix-web-services:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
