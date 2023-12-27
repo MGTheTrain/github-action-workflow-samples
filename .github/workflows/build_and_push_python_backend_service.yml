@@ -26,16 +26,17 @@ jobs:
         run: |
           python -m pytest -s test --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
         working-directory: ./backend-services/python/hello-world-service
-      - name: List folders and files
+      - name: Install Snyk for Python scans
         run: |
-          ls -al
-        working-directory: ./backend-services/python/hello-world-service
+          apt-get install -y curl
+          curl --compressed https://static.snyk.io/cli/latest/snyk-macos -o snyk
+          chmod +x ./snyk
+          mv ./snyk /usr/local/bin/
       - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
-        uses: snyk/actions/python@master
-        env:
+        env: 
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: ./backend-services/python/hello-world-service --file=requirements.txt --command=python3 --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+        run: |
+          snyk test --file=requirements.txt --command=python3 --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
       - name: Set up QEMU 
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx 🐳
