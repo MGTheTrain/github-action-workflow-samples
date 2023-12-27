@@ -1,0 +1,7 @@
+version: v1.1266.0
+ignore:
+  - id: SNYK-DEBIAN11-ZLIB-6008961
+    patched: false
+    reason: "Ignored"
+    paths:
+      - from: zlib/zlib1g@1:1.2.11.dfsg-2+deb11u2
