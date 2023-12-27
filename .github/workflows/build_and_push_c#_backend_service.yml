@@ -1,4 +1,4 @@
-name: Build and Push Docker Image to an Azure Container Registry (ACR)
+name: CI/CT workflow for C# ASP .NET Core service
 
 on:
   workflow_dispatch:
