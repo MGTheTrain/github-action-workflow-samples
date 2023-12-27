@@ -1,4 +1,4 @@
-name: Build and Push Docker Image to ann Azure Container Registry (ACR)
+name: Build and Push Docker Image to an Azure Container Registry (ACR)
 
 on:
   workflow_dispatch:
