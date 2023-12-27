@@ -1,7 +1,7 @@
 FROM alpine:latest AS builder
 
 WORKDIR /app
-COPY ./hello-world-service .
+COPY . .
 
 RUN /bin/sh -c "apk add --no-cache go && \
                 go mod tidy && \
