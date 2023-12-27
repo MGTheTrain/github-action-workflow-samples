@@ -19,9 +19,10 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+        continue-on-error: false
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: ./backend-services/c#/HelloWorldService
-          # push: true
+          push: true
           tags: csharp-hello-world-service:stable
