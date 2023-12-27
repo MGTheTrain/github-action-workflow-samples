@@ -36,4 +36,4 @@ TBD
 
 ### Results
 
-- [Build artifacts in an Azure Container Registry](./images/build-artifacts-in-an-azure-container-registry.PNG)
+- ![Build artifacts in an Azure Container Registry](./images/build-artifacts-in-an-azure-container-registry.PNG)
