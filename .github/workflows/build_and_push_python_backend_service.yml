@@ -29,7 +29,7 @@ jobs:
       - name: Install Snyk for Python scans
         run: |
           sudo apt-get install -y curl
-          sudo curl --compressed https://static.snyk.io/cli/latest/snyk-macos -o snyk
+          sudo curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
           sudo chmod +x ./snyk
           sudo mv ./snyk /usr/local/bin/
       - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
