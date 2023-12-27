@@ -35,12 +35,16 @@ jobs:
           registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build docker image
+      - name: Setup Docker build-push-action
         uses: docker/build-push-action@v5
-        with:
-          context: ./backend-services/go/hello-world-service/src
-          # push: true
-          tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable
+      - name: Build docker image
+        run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable .
+        working-directory: ./backend-services/go/hello-world-service/src/Dockerfile
+        # with:
+        #   context: ./backend-services/go/hello-world-service/src
+        #   # push: true
+        #   tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable
+      
       # - name: Run Snyk to check Docker image for vulnerabilities
       #   uses: snyk/actions/docker@master
       #   env:
