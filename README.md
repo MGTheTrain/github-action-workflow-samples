@@ -14,7 +14,8 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 
 ## References
 
-- [Build and push Docker images Github Action](https://github.com/marketplace/actions/build-and-push-docker-images)
+- [build-push-action Github repository](https://github.com/docker/build-push-action)
+- [login-action Github repository](https://github.com/docker/login-action)
 
 ## How to use
 
