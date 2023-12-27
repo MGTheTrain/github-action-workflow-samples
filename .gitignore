@@ -4,3 +4,4 @@ go.sum
 target
 __pycache__
 .pytest_cache
+Cargo.lock
