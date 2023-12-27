@@ -1,4 +1,4 @@
-name: Build and Push Docker Image to ACR
+name: Build and Push Docker Image to ann Azure Container Registry (ACR)
 
 on:
   workflow_dispatch:
@@ -27,14 +27,14 @@ jobs:
           registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Build and push C# ASP .NET Core sample service
+      - name: Build and push dockerized C# ASP .NET Core sample service to an Azure Container Regsitry
         uses: docker/build-push-action@v5
         if: ${{ github.event.inputs.service == 'csharp' }}
         with:
           context: ./backend-services/c#/HelloWorldService
           push: true
           tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/csharp-hello-world-service:stable
-      - name: Build and push Go Gin sample service
+      - name: Build and push dockerized Go Gin sample service to an Azure Container Regsitry
         uses: docker/build-push-action@v5
         if: ${{ github.event.inputs.service == 'go' }}
         with:
