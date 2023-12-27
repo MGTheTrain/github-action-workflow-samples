@@ -28,6 +28,7 @@ jobs:
         env: 
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
+          cargo build
           snyk test --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
         working-directory: ./backend-services/rust/hello-world-service
       - name: Set up QEMU 
