@@ -28,10 +28,10 @@ jobs:
         working-directory: ./backend-services/python/hello-world-service
       - name: Install Snyk for Python scans
         run: |
-          apt-get install -y curl
-          curl --compressed https://static.snyk.io/cli/latest/snyk-macos -o snyk
-          chmod +x ./snyk
-          mv ./snyk /usr/local/bin/
+          sudo apt-get install -y curl
+          sudo curl --compressed https://static.snyk.io/cli/latest/snyk-macos -o snyk
+          sudo chmod +x ./snyk
+          sudo mv ./snyk /usr/local/bin/
       - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
         env: 
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
