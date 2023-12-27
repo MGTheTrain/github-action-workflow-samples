@@ -1,32 +1,24 @@
-name: CI/CT workflow for Python FastAPI service
+name: CI/CT workflow for Rust Actix Web service
 
 on:
   workflow_dispatch:
 
 jobs:
-  ci-ct-job-for-python-fast-api-services:
+  ci-ct-job-for-rust-fast-api-services:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.11"]
     steps:
       - name: Checkout code
         uses: actions/checkout@master
-      - name: Set up Python 
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+      - name: Install Rust
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest pytest-cov pipenv
-        working-directory: ./backend-services/python/hello-world-service
+          sudo apt-get install -y curl build-essential
+          sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        working-directory: ./backend-services/rust/hello-world-service
       - name: Run tests
         run: |
-          python -m pytest -s test --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-        working-directory: ./backend-services/python/hello-world-service
-      - name: Install Snyk for Python scans
+          cargo test
+        working-directory: ./backend-services/rust/hello-world-service
+      - name: Install Snyk for Rust scans
         run: |
           sudo apt-get install -y curl
           sudo curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
@@ -36,8 +28,8 @@ jobs:
         env: 
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
-          snyk test --file=requirements.txt --command=python3 --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
-        working-directory: ./backend-services/python/hello-world-service
+          snyk test --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+        working-directory: ./backend-services/rust/hello-world-service
       - name: Set up QEMU 
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx 🐳
@@ -48,15 +40,15 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build docker image 🐳/📦
-        run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable .
-        working-directory: ./backend-services/python/hello-world-service
+        run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/rust-hello-world-service:stable .
+        working-directory: ./backend-services/rust/hello-world-service
       - name: Run Snyk to check Docker image 🐳/📦 for vulnerabilities 🔍/🛡️
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
-          snyk container test ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable --severity-threshold=high --sarif-file-output=snyk.sarif
+          snyk container test ${{ secrets.REGISTRY_LOGIN_SERVER }}/rust-hello-world-service:stable --severity-threshold=high --sarif-file-output=snyk.sarif
       - name: Push docker image 🐳/📦
-        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable
+        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/rust-hello-world-service:stable
       # - name: Upload Snyk report as sarif 🐳/📦
       #   uses: github/codeql-action/upload-sarif@v2
       #   with:
