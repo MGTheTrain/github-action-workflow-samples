@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
       - name: Setup Go 1.21.x
         uses: actions/setup-go@v4
         with:
@@ -19,6 +19,16 @@ jobs:
       - name: Go test
         run: go test
         working-directory: ./backend-services/go/hello-world-service/test
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/golang@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: ./backend-services/go/hello-world-service --severity-threshold=high --sarif-file-output=snyk.sarif
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
       - name: Set up QEMU 
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
