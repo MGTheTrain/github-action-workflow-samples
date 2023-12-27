@@ -21,10 +21,10 @@ jobs:
         working-directory: ./backend-services/go/hello-world-service/test
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/golang@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        # env:
+        #   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: ./backend-services/go/hello-world-service --severity-threshold=high --sarif-file-output=snyk.sarif
+          args: ./backend-services/go/hello-world-service --org=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high --sarif-file-output=snyk.sarif
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
