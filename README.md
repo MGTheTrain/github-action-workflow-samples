@@ -15,10 +15,11 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 
 ## References
 
-- [build-push-action Github repository](https://github.com/docker/build-push-action)
 - [login-action Github repository](https://github.com/docker/login-action)
 - [Building and testing Go](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go)
 - [Snyk Actions Github repository](https://github.com/snyk/actions)
+- [docker-login Action Github repository](https://github.com/Azure/docker-login)
+- [build-push-action Github repository. This does not work with [Snyk docker action](https://github.com/snyk/actions/tree/master/docker)](https://github.com/docker/build-push-action)
 
 ## How to use
 
