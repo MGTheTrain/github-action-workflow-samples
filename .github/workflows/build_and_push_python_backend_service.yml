@@ -1,0 +1,55 @@
+name: CI/CT workflow for Python FastAPI service
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci-ct-job-for-python-gin-services:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Set up Python 
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies and run tests
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m pytest -s test --junitxml=out_report.xml
+        working-directory: ./backend-services/python/hello-world-service
+      - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: ./backend-services/python/hello-world-service --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+      - name: Set up QEMU 
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx 🐳
+        uses: docker/setup-buildx-action@v3
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build docker image 🐳/📦
+        run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable .
+        working-directory: ./backend-services/python/hello-world-service
+      - name: Run Snyk to check Docker image 🐳/📦 for vulnerabilities 🔍/🛡️
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable
+          args: --severity-threshold=high --sarif-file-output=snyk.sarif
+      - name: Push docker image 🐳/📦
+        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable
+      # - name: Upload Snyk report as sarif 🐳/📦
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: snyk.sarif
