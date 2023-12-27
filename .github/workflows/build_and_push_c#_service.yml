@@ -23,5 +23,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./backend-services/c#/HelloWorldService
-          push: true
+          # push: true
           tags: csharp-hello-world-service:stable
