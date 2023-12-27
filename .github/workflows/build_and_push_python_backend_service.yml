@@ -37,6 +37,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           snyk test --file=requirements.txt --command=python3 --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+        working-directory: ./backend-services/python/hello-world-service
       - name: Set up QEMU 
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx 🐳
