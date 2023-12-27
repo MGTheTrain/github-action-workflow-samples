@@ -24,11 +24,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: ./backend-services/go/hello-world-service/src --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high --sarif-file-output=snyk.sarif
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk.sarif
+          args: ./backend-services/go/hello-world-service/src --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
       - name: Set up QEMU 
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
