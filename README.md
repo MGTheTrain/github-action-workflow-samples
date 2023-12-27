@@ -35,6 +35,8 @@ Setup a/an
 
 ### Run Github Action workflows
 
+Clicking on the provided links will direct you to the respective GitHub Action workflows:
+
 [![CI/CT workflow for C# ASP .NET Core service docker image](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_c%23_backend_service.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_c%23_backend_service.yml)
 
 [![CI/CT workflow for Go Gin service docker image](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_go_backend_service.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_go_backend_service.yml)
