@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "dgSpecHash": "deFhRfAc+9gUAsu83aNG2SaTk4PTcko5br2V5dTTrI1Fr79gnt+xM4Tt1j2sMRcEm0cycyO+dmZbaNyoquG3qA==",
+  "success": true,
+  "projectFilePath": "D:\\automation-pipeline-repos\\github-action-workflow-samples\\backend-services\\c#\\HelloWorldService\\HelloWorldService.csproj",
+  "expectedPackageFiles": [],
+  "logs": []
+}
