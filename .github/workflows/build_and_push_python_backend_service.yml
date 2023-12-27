@@ -51,12 +51,10 @@ jobs:
         run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable .
         working-directory: ./backend-services/python/hello-world-service
       - name: Run Snyk to check Docker image 🐳/📦 for vulnerabilities 🔍/🛡️
-        uses: snyk/actions/docker@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable
-          args: --severity-threshold=high --sarif-file-output=snyk.sarif
+        run: |
+          snyk container test ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable --severity-threshold=high --sarif-file-output=snyk.sarif
       - name: Push docker image 🐳/📦
         run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/python-hello-world-service:stable
       # - name: Upload Snyk report as sarif 🐳/📦
