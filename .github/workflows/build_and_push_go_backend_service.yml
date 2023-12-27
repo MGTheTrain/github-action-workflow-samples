@@ -24,7 +24,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_ORGANIZATION_ID }}
         with:
-          args: ./backend-services/go/hello-world-service --severity-threshold=high --sarif-file-output=snyk.sarif
+          args: ./backend-services/go/hello-world-service/src --severity-threshold=high --sarif-file-output=snyk.sarif
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
         with:
