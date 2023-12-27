@@ -35,8 +35,13 @@ Setup a/an
 
 ### Run Github Action workflows
 
-TBD
+[![CI/CT workflow for C# ASP .NET Core service docker image](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_c%23_backend_service.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_c%23_backend_service.yml)
 
+[![CI/CT workflow for Go Gin service docker image](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_go_backend_service.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_go_backend_service.yml)
+
+[![CI/CT workflow for Python FastAPI service docker image](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_python_backend_service.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_python_backend_service.yml)
+
+[![CI/CT workflow for Rust Actix Web service docker image](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_backend_service.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_backend_service.yml)
 
 ### Results
 
