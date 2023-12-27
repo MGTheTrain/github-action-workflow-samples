@@ -6,9 +6,6 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    defaults: 
-      run:
-        working-directory: ./backend-services/c#/HelloWorldService/Dockerfile
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -25,5 +22,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: ./backend-services/c#/HelloWorldService/Dockerfile
           push: true
           tags: csharp-hello-world-service:stable
