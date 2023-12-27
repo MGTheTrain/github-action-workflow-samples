@@ -1,4 +1,4 @@
-name: CI/CT workflow for Go Gin service
+name: CI/CT workflow for Go Gin service docker image
 
 on:
   workflow_dispatch:

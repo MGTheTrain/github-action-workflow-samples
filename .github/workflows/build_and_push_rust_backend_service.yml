@@ -1,4 +1,4 @@
-name: CI/CT workflow for Rust Actix Web service
+name: CI/CT workflow for Rust Actix Web service docker image
 
 on:
   workflow_dispatch:
@@ -29,7 +29,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: |
           cargo build
-          snyk test --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+          snyk code test --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
         working-directory: ./backend-services/rust/hello-world-service
       - name: Set up QEMU 
         uses: docker/setup-qemu-action@v3

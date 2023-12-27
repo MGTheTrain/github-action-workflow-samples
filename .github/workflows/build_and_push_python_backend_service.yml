@@ -1,4 +1,4 @@
-name: CI/CT workflow for Python FastAPI service
+name: CI/CT workflow for Python FastAPI service docker image
 
 on:
   workflow_dispatch:
