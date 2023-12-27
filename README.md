@@ -7,6 +7,7 @@
 - [How to use](#how-to-use)
   - [Perequisite](#perequisite)
   - [Run Github Action workflows](#run-github-action-workflows)
+  - [Results](#results)
 
 ## Summary
 
@@ -30,3 +31,8 @@ Setup a/an
 ### Run Github Action workflows
 
 TBD
+
+
+### Results
+
+- [Build artifacts in an Azure Container Registry](./images/build-artifacts-in-an-azure-container-registry.PNG)
