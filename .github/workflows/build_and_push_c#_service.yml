@@ -25,4 +25,4 @@ jobs:
         with:
           context: ./backend-services/c#/HelloWorldService
           push: true
-          tags: csharp-hello-world-service:stable
+          tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/csharp-hello-world-service:stable
