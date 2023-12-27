@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     
 jobs:
-  ci-ct-workflow-for-csharp-asp-net-core-services:
+  ci-ct-job-for-csharp-asp-net-core-services:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

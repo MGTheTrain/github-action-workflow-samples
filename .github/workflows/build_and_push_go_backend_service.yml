@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci-ct-workflow-for-go-gin-services:
+  ci-ct-job-for-go-gin-services:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
