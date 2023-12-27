@@ -46,6 +46,9 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build docker image 🐳/📦
+        run: docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable .
+        working-directory: ./backend-services/go/hello-world-service/src/Dockerfile
       - name: Run Snyk to check Docker image 🐳 for vulnerabilities
         uses: snyk/actions/docker@master
         env:
@@ -53,6 +56,8 @@ jobs:
         with:
           image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable
           args: --severity-threshold=high --sarif-file-output=snyk.sarif
+      - name: Push docker image 🐳/📦
+        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/go-hello-world-service:stable
       - name: Upload Snyk report as sarif 📦
         uses: github/codeql-action/upload-sarif@v2
         with:
