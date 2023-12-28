@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     
 jobs:
-  ci-ct-job-for-csharp-libraries:
+  ci-ct-job-for-go-libraries:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
