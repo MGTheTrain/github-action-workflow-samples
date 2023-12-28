@@ -41,7 +41,14 @@ jobs:
         run: |
           sudo apt-get install -y zip
           export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
-          find -type f | while read f; do zip v${BUILD_VERSION}.zip "$f"; done
+
+          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
+
+          for dir_name in $target_folders; do
+              absolute_path=$(realpath "$dir_name")
+              modified_dir_name=${dir_name//\//-}
+              (cd "$absolute_path" && zip ${modified_dir_name}-v${BUILD_VERSION}.zip)
+          done
         working-directory: ./libraries/go/common-lib/src/
       - name: Install CloudSmith dependencies
         run: |
