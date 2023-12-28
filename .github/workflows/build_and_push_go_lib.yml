@@ -40,8 +40,8 @@ jobs:
       - name: Create go package 📦
         run: |
           sudo apt-get install -y zip
+          
           export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
-
           target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
 
           for dir_name in $target_folders; do
@@ -60,6 +60,7 @@ jobs:
               # To achieve this, the Git run number will serve as the revision number. 
               # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
         run: |
+          export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
           target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
 
           for dir_name in $target_folders; do
