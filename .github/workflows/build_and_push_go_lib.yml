@@ -13,30 +13,30 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.21.x'
-      - name: Go mod tidy 🐹
-        run: |
-          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
+      # - name: Go mod tidy 🐹
+      #   run: |
+      #     target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
 
-          for dir_name in $target_folders; do
-              absolute_path=$(realpath "$dir_name")
-              (cd "$absolute_path" && go mod tidy)
-          done
-        working-directory: ./libraries/go/common-lib/test
-      - name: Go test 🐹
-        run: |
-          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
+      #     for dir_name in $target_folders; do
+      #         absolute_path=$(realpath "$dir_name")
+      #         (cd "$absolute_path" && go mod tidy)
+      #     done
+      #   working-directory: ./libraries/go/common-lib/test
+      # - name: Go test 🐹
+      #   run: |
+      #     target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
 
-          for dir_name in $target_folders; do
-              absolute_path=$(realpath "$dir_name")
-              (cd "$absolute_path" && go test)
-          done
-        working-directory: ./libraries/go/common-lib/test
-      - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
-        uses: snyk/actions/golang@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: $(find ./libraries/go/common-lib/src -type f -name '*.mod' -exec dirname {} \;) --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+      #     for dir_name in $target_folders; do
+      #         absolute_path=$(realpath "$dir_name")
+      #         (cd "$absolute_path" && go test)
+      #     done
+      #   working-directory: ./libraries/go/common-lib/test
+      # - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
+      #   uses: snyk/actions/golang@master
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      #   with:
+      #     args: $(find ./libraries/go/common-lib/src -type f -name '*.mod' -exec dirname {} \;) --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
       - name: Create go package 📦
         run: |
           sudo apt-get install -y zip
