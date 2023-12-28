@@ -1,15 +1,16 @@
 package main_test
 
 import (
-	"domain_models"
 	"testing"
+
+	"github.com/MGTheTrain/github-action-workflow-samples/libraries/go/common-lib/src/domain/models"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestValidate(t *testing.T) {
 	// Initialize the struct with valid data
-	u := &domain_models.User{
+	u := &models.User{
 		UserID:          StringPointer("123"),
 		UserName:        StringPointer("username"),
 		UserPassword:    StringPointer("password123"),

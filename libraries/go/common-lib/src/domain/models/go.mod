@@ -1,4 +1,4 @@
-module github.com/MGTheTrain/github-action-workflow-samples/libraries/go/common-lib/src/domain/models
+module domain_models
 
 go 1.21.3
 

@@ -2,14 +2,14 @@ package main_test
 
 import (
 	"testing"
-	"web_dtos"
 
+	"github.com/MGTheTrain/github-action-workflow-samples/libraries/go/common-lib/src/web/dtos"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestValidate(t *testing.T) {
 	// Initialize the struct with valid data
-	u := &web_dtos.UserRequestDto{
+	u := &dtos.UserRequestDto{
 		UserName:     StringPointer("username"),
 		UserPassword: StringPointer("password123"),
 		Email:        StringPointer("test@example.com"),

@@ -1,4 +1,4 @@
-package domain_models
+package models
 
 type IModel interface {
 	Validate() []string

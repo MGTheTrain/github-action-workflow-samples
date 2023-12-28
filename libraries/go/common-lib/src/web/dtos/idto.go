@@ -1,4 +1,4 @@
-package web_dtos
+package dtos
 
 type IDto interface {
 	Validate() []string
