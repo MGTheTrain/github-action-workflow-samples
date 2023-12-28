@@ -22,19 +22,14 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: ./libraries/c#/src/CommonLib --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
-      - name: Create nuget package
+      - name: Create nuget package 📦
         run: |
           dotnet build 
           dotnet pack -c Release
         working-directory: ./libraries/c#/src/CommonLib
-      - name: Push nuget package to CloudSmith
-        id: push
-        uses: ./
-        with:
-          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
-          command: "push"
-          format: "nuget"
-          owner: "cloudsmith"
-          repo: "actions"
-          republish: "true" # needed ONLY if version is not changing
-          file: ./libraries/c#/src/CommonLib/bin/Release/CommonLib.1.0.0.nupk
+      - name: Install CloudSmith dependencies
+        run: |
+          apt-get install -y python3 python3-pip
+          pip3 install --upgrade cloudsmith-cli
+      - name: Push nuget package 📦 to CloudSmith 
+        run: cloudsmith push nuget ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./libraries/c#/src/CommonLib/bin/Release/CommonLib.1.0.0.nupk
