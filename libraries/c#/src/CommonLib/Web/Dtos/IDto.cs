@@ -8,7 +8,7 @@ namespace CommonLib.Web.Dtos
         /// Method for validating member attributes
         /// </summary>
         /// <params></params>
-        /// <returns>Returns void</returns>
+        /// <returns>Returns IEnumerable<ValidationResult></returns>
         IEnumerable<ValidationResult> Validate(ValidationContext validationContext);
     }
 }

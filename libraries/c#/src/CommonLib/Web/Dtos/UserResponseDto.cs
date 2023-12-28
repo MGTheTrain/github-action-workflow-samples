@@ -11,6 +11,11 @@ namespace CommonLib.Web.Dtos
         public DateTime? dateTimeCreated { get; internal set; }
         public DateTime? dateTimeUpdated { get; internal set; }
 
+        /// <summary>
+        /// Method for validating member attributes
+        /// </summary>
+        /// <params></params>
+        /// <returns>Returns IEnumerable<ValidationResult></returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             throw new NotImplementedException();
