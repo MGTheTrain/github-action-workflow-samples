@@ -36,7 +36,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: $(find ./libraries/go/common-lib/src/domain/models -type f -name '*.mod' -exec dirname {} \;) --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+          args: $(find ./libraries/go/common-lib/src -type f -name '*.mod' -exec dirname {} \;) --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
       - name: Create go package 📦
         run: |
           sudo apt-get install -y zip
