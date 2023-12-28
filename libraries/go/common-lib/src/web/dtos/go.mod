@@ -1,4 +1,4 @@
-module web_dtos
+module github.com/MGTheTrain/github-action-workflow-samples/libraries/go/common-lib/src/web/dtos
 
 go 1.21.3
 
