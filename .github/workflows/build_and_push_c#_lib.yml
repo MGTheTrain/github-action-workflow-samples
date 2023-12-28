@@ -1,0 +1,32 @@
+name: CI/CT workflow for C# library nuget packages
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  ci-ct-job-for-csharp-asp-net-core-services:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+      - name: Test with the dotnet CLI
+        run: find . -name '*.csproj' -exec dotnet test {} \;
+        working-directory: ./libraries/c#/test
+      - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
+        uses: snyk/actions/dotnet@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: ./libraries/c#/src/CommonLib --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+      - name: Create nuget package
+        run: |
+          dotnet build 
+          dotnet pack -c Release
+        working-directory: ./libraries/c#/src/CommonLib
+      # - name: Push nuget package to CloudSmith
+      #   run: |
+      #     TBD
