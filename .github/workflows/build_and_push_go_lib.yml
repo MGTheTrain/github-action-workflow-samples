@@ -15,24 +15,22 @@ jobs:
           go-version: '1.21.x'
       - name: Go mod tidy 🐹
         run: |
-          target_folders=$(find . -name '*.mod')
-          dir_names=$(dirname ${target_folders})
-          absolute_path=$(realpath ${dir_names})
-          for ap in "$absolute_path"; do
-              cd $ap
-              go mod tidy
-              cd -
+          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
+
+          for dir_name in $target_folders; do
+              absolute_path=$(realpath "$dir_name")
+              echo "Processing directory: $absolute_path"
+              (cd "$absolute_path" && go mod tidy)
           done
         working-directory: ./libraries/go/common-lib/test
       - name: Go test 🐹
         run: |
-          target_folders=$(find . -name '*.mod')
-          dir_names=$(dirname ${target_folders})
-          absolute_path=$(realpath ${dir_names})
-          for ap in "$absolute_path"; do
-              cd $ap
-              go test
-              cd -
+          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
+
+          for dir_name in $target_folders; do
+              absolute_path=$(realpath "$dir_name")
+              echo "Processing directory: $absolute_path"
+              (cd "$absolute_path" && go test)
           done
         working-directory: ./libraries/go/common-lib/test
       - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
@@ -43,13 +41,12 @@ jobs:
           args: ./libraries/go/common-lib/src/ --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
       - name: Create go package 📦
         run: |
-          target_folders=$(find . -name '*.mod')
-          dir_names=$(dirname ${target_folders})
-          absolute_path=$(realpath ${dir_names})
-          for ap in "$absolute_path"; do
-              cd $ap
-              go mod tidy
-              cd -
+          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
+
+          for dir_name in $target_folders; do
+              absolute_path=$(realpath "$dir_name")
+              echo "Processing directory: $absolute_path"
+              (cd "$absolute_path" && go mod tidy)
           done
         working-directory: ./libraries/go/common-lib/src/
       - name: Install CloudSmith dependencies
