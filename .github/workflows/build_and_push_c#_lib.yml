@@ -27,6 +27,14 @@ jobs:
           dotnet build 
           dotnet pack -c Release
         working-directory: ./libraries/c#/src/CommonLib
-      # - name: Push nuget package to CloudSmith
-      #   run: |
-      #     TBD
+      - name: Push nuget package to CloudSmith
+        id: push
+        uses: ./
+        with:
+          api-key: ${{ secrets.CLOUDSMITH_API_KEY }}
+          command: "push"
+          format: "nuget"
+          owner: "cloudsmith"
+          repo: "actions"
+          republish: "true" # needed ONLY if version is not changing
+          file: ./libraries/c#/src/CommonLib/bin/Release/CommonLib.1.0.0.nupk
