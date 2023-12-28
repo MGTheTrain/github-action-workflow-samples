@@ -17,7 +17,7 @@ setup(
     description='Common logic utilized in several services and applications',
     author='MGTheTrain',
     author_email='mgthetrain@email.com',
-    packages=find_packages(),
+    packages=find_packages(include=['domain.*', 'web.*']),
     install_requires=[
         'pydantic',
     ],
