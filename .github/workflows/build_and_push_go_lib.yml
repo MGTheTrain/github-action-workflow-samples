@@ -1,0 +1,64 @@
+name: CI/CT workflow for Go library packages
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  ci-ct-job-for-csharp-libraries:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Go 1.21.x 🐹
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.x'
+      - name: Go mod tidy 🐹
+        run: |
+          target_folders=$(find . -name '*.mod')
+          dir_names=$(dirname ${target_folders})
+          absolute_path=$(realpath ${dir_names})
+          for ap in "$absolute_path"; do
+              cd $ap
+              go mod tidy
+              cd -
+          done
+        working-directory: ./libraries/go/common-lib/test
+      - name: Go test 🐹
+        run: |
+          target_folders=$(find . -name '*.mod')
+          dir_names=$(dirname ${target_folders})
+          absolute_path=$(realpath ${dir_names})
+          for ap in "$absolute_path"; do
+              cd $ap
+              go test
+              cd -
+          done
+        working-directory: ./libraries/go/common-lib/test
+      - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
+        uses: snyk/actions/golang@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: ./libraries/go/common-lib/src/ --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+      - name: Create go package 📦
+        run: |
+          target_folders=$(find . -name '*.mod')
+          dir_names=$(dirname ${target_folders})
+          absolute_path=$(realpath ${dir_names})
+          for ap in "$absolute_path"; do
+              cd $ap
+              go mod tidy
+              cd -
+          done
+        working-directory: ./libraries/go/common-lib/src/
+      - name: Install CloudSmith dependencies
+        run: |
+          sudo apt-get install -y python3 python3-pip
+          sudo pip3 install --upgrade cloudsmith-cli
+      # - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
+      #         # To achieve this, the Git run number will serve as the revision number. 
+      #         # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
+      #   run: |
+      #     export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
+      #     cloudsmith push nuget ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./libraries/c#/src/CommonLib/bin/Release/CommonLib.${BUILD_VERSION}.nupkg
