@@ -50,7 +50,7 @@ jobs:
       - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
               # To achieve this, the Git run number will serve as the revision number. 
               # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
-        run: cloudsmith push python ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} common_lib-0.1.0-dev${{ github.run_number }}-py3-none-any.whl
+        run: cloudsmith push python ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} dist/common_lib-0.1.0-dev${{ github.run_number }}-py3-none-any.whl
         working-directory: ./libraries/python/common-lib
 
       
