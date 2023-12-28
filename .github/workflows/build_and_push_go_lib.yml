@@ -50,7 +50,7 @@ jobs:
               modified_dir_name=${dir_name//\//-}
               modified_dir_name=${modified_dir_name:2}
               echo $modified_dir_name
-              (cd "$absolute_path" && rm -rf .git/ && sudo go mod tidy && find -type f | while read f; do zip common-lib-${modified_dir_name}-v${BUILD_VERSION}.zip "$f"; done)
+              (cd "$absolute_path" && rm -rf .git/ go.sum && sudo go mod tidy && find -type f | while read f; do zip common-lib-${modified_dir_name}-v${BUILD_VERSION}.zip "$f"; done)
           done
         working-directory: ./libraries/go/common-lib/src/
       - name: Install CloudSmith dependencies
