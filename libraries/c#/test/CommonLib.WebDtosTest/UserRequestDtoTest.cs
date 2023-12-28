@@ -17,14 +17,8 @@ namespace CommonLib.WebDtosTest
             userRequestDto.userName = "ValidUserName";
             userRequestDto.userPassword = "StrongPassword123!";
             userRequestDto.email = "test@example.com";
-            userRequestDto.userId = Guid.NewGuid();
-            userRequestDto.dateTimeCreated = DateTime.Now;
-            userRequestDto.dateTimeUpdated = DateTime.Now;
 
             // Additional null checks
-            Assert.NotNull(userRequestDto.userId);
-            Assert.NotNull(userRequestDto.dateTimeCreated);
-            Assert.NotNull(userRequestDto.dateTimeUpdated);
             Assert.NotNull(userRequestDto.userName);
             Assert.NotNull(userRequestDto.userPassword);
             Assert.NotNull(userRequestDto.email);

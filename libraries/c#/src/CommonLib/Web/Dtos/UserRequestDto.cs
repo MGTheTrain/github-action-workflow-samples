@@ -5,12 +5,9 @@ namespace CommonLib.Web.Dtos
 {
     public class UserRequestDto: IDto
     {
-        public Guid? userId { get; set; }
         public string? userName { get; set; }
         public string? userPassword { get; set; }
         public string? email { get; set; }
-        public DateTime? dateTimeCreated { get; set; }
-        public DateTime? dateTimeUpdated { get; set; }
 
                 /// <summary>
         /// Method for validating member attributes
@@ -19,9 +16,6 @@ namespace CommonLib.Web.Dtos
         /// <returns>Returns IEnumerable<ValidationResult></returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (userId == null){
-                yield return new ValidationResult($"{nameof(UserResponseDto)}.{nameof(userId)} can't be empty");
-            }
             if (userName == null || userName.Length > 50){
                 yield return new ValidationResult($"{nameof(UserResponseDto)}.{nameof(userName)} can't be empty or exceed 50 characters");
             }
@@ -30,12 +24,6 @@ namespace CommonLib.Web.Dtos
             }
             if (email == null){
                 yield return new ValidationResult($"{nameof(UserResponseDto)}.{nameof(email)} can't be empty");
-            }
-            if (dateTimeCreated == null){
-                yield return new ValidationResult($"{nameof(UserResponseDto)}.{nameof(dateTimeCreated)} can't be empty");
-            }
-            if (dateTimeUpdated == null){
-                yield return new ValidationResult($"{nameof(UserResponseDto)}.{nameof(dateTimeUpdated)} can't be empty");
             }
 
             int specialCharCount = userPassword!.Count(c => !char.IsLetterOrDigit(c));
