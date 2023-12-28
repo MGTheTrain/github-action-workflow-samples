@@ -19,7 +19,6 @@ jobs:
 
           for dir_name in $target_folders; do
               absolute_path=$(realpath "$dir_name")
-              echo "Processing directory: $absolute_path"
               (cd "$absolute_path" && go mod tidy)
           done
         working-directory: ./libraries/go/common-lib/test
@@ -29,7 +28,6 @@ jobs:
 
           for dir_name in $target_folders; do
               absolute_path=$(realpath "$dir_name")
-              echo "Processing directory: $absolute_path"
               (cd "$absolute_path" && go test)
           done
         working-directory: ./libraries/go/common-lib/test
@@ -41,21 +39,17 @@ jobs:
           args: ./libraries/go/common-lib/src/ --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
       - name: Create go package 📦
         run: |
-          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
-
-          for dir_name in $target_folders; do
-              absolute_path=$(realpath "$dir_name")
-              echo "Processing directory: $absolute_path"
-              (cd "$absolute_path" && go mod tidy)
-          done
+          sudo apt-get install -y zip
+          export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
+          find -type f | while read f; do zip v${BUILD_VERSION}.zip "$f"; done
         working-directory: ./libraries/go/common-lib/src/
       - name: Install CloudSmith dependencies
         run: |
           sudo apt-get install -y python3 python3-pip
           sudo pip3 install --upgrade cloudsmith-cli
-      # - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
-      #         # To achieve this, the Git run number will serve as the revision number. 
-      #         # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
-      #   run: |
-      #     export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
-      #     cloudsmith push nuget ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./libraries/c#/src/CommonLib/bin/Release/CommonLib.${BUILD_VERSION}.nupkg
+      - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
+              # To achieve this, the Git run number will serve as the revision number. 
+              # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
+        run: |
+          export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
+          cloudsmith push go ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./libraries/go/common-lib/src/v${BUILD_VERSION}.zip
