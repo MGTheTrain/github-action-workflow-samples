@@ -6,3 +6,6 @@ __pycache__
 .pytest_cache
 Cargo.lock
 junit
+build
+dist
+common_lib.egg-info
