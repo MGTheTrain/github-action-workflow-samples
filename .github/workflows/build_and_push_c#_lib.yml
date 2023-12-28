@@ -21,8 +21,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: ./libraries/c#/src/CommonLib --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
-      - name: Create nuget package 📦. The package version needs to be unique. Therefore the Git run number will be utilized as revision number
+          args: ./libraries/c#/src/CommonLib --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity
         run: |
           export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
           dotnet pack -c Release
@@ -31,7 +30,7 @@ jobs:
         run: |
           sudo apt-get install -y python3 python3-pip
           sudo pip3 install --upgrade cloudsmith-cli
-      - name: Push nuget package 📦 to CloudSmith. The package version needs to be unique. Therefore the Git run number will be utilized as revision number
+      - name: Push nuget package 📦 to CloudSmith. The uniqueness of the package version is essential. To achieve this, the Git run number will serve as the revision number
         run: |
           export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
           cloudsmith push nuget ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./libraries/c#/src/CommonLib/bin/Release/CommonLib.${BUILD_VERSION}.nupkg
