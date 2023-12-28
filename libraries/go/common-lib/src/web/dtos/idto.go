@@ -1,4 +1,4 @@
-package web_controllers
+package web_dtos
 
 type IDto interface {
 	Validate() []string
