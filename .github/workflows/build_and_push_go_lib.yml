@@ -47,6 +47,8 @@ jobs:
           for dir_name in $target_folders; do
               absolute_path=$(realpath "$dir_name")
               modified_dir_name=${dir_name//\//-}
+              modified_dir_name=${modified_dir_name:2}
+              echo $modified_dir_name
               (cd "$absolute_path" && zip ${modified_dir_name}-v${BUILD_VERSION}.zip)
           done
         working-directory: ./libraries/go/common-lib/src/
