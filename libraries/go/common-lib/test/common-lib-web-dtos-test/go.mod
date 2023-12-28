@@ -2,11 +2,9 @@ module main_test
 
 go 1.21.3
 
-replace web_dtos => ../../src/web/dtos
-
 require (
+	github.com/MGTheTrain/github-action-workflow-samples/libraries/go/common-lib/src/web/dtos v0.0.0-20231228170305-a3978fc8b538
 	github.com/stretchr/testify v1.8.4
-	web_dtos v0.0.0-00010101000000-000000000000
 )
 
 require (
