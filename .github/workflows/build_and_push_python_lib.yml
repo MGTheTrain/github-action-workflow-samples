@@ -1,0 +1,50 @@
+name: CI/CT workflow for pip packages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci-ct-job-for-python-libraries:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Set up Python 
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov pipenv
+        working-directory: ./libraries/python/common-lib
+      - name: Run tests
+        run: |
+          python -m pytest -s test --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+        working-directory: ./libraries/python/common-lib
+      - name: Install Snyk for Python scans
+        run: |
+          sudo apt-get install -y curl
+          sudo curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
+          sudo chmod +x ./snyk
+          sudo mv ./snyk /usr/local/bin/
+      - name: Run Snyk to check for vulnerabilities in the source code 🔍/🛡️
+        env: 
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: |
+          snyk test --file=requirements.txt --command=python3 --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
+        working-directory: ./libraries/python/common-lib
+      - name: Create pip package 📦
+        run: python setup.py bdist_wheel --version 0.1.0-dev${{ github.run_number }}
+        working-directory: ./libraries/python/common-lib
+      - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
+              # To achieve this, the Git run number will serve as the revision number. 
+              # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
+        run: cloudsmith push python ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} common_lib-0.1.0-dev${{ github.run_number }}-py3-none-any.whl
+        working-directory: ./libraries/python/common-lib
+
+      
