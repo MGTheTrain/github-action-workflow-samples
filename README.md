@@ -24,6 +24,9 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 - [build-push-action Github repository. This does not work with [Snyk docker action](https://github.com/snyk/actions/tree/master/docker)](https://github.com/docker/build-push-action)
 - [CloudSmith Action Github repository](https://github.com/cloudsmith-io/action)
 - [Automated versioning and package publishing using GitHub Actions](https://dotnetthoughts.net/automated-versioning-and-package-publishing-using-github-actions/)
+- [Upload Go package to CloudSmith](https://help.cloudsmith.io/docs/go-registry)
+- [Go -Publishing a module](https://go.dev/doc/modules/publishing)
+- [Go - Module version numbering](https://go.dev/doc/modules/version-numbers)
 
 ## How to use
 
