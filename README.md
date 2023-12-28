@@ -23,6 +23,7 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 - [docker-login Action Github repository](https://github.com/Azure/docker-login)
 - [build-push-action Github repository. This does not work with [Snyk docker action](https://github.com/snyk/actions/tree/master/docker)](https://github.com/docker/build-push-action)
 - [CloudSmith Action Github repository](https://github.com/cloudsmith-io/action)
+- [Automated versioning and package publishing using GitHub Actions](https://dotnetthoughts.net/automated-versioning-and-package-publishing-using-github-actions/)
 
 ## How to use
 
