@@ -49,7 +49,7 @@ jobs:
               modified_dir_name=${dir_name//\//-}
               modified_dir_name=${modified_dir_name:2}
               echo $modified_dir_name
-              (cd "$absolute_path" && rm -rf .git/ && find -type f | while read f; do zip ${modified_dir_name}-v${BUILD_VERSION}.zip "$f"; done)
+              (cd "$absolute_path" && rm -rf .git/ go.sum && find -type f | while read f; do zip ${modified_dir_name}-v${BUILD_VERSION}.zip "$f"; done)
           done
         working-directory: ./libraries/go/common-lib/src/
       - name: Install CloudSmith dependencies
@@ -60,5 +60,12 @@ jobs:
               # To achieve this, the Git run number will serve as the revision number. 
               # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
         run: |
-          export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
-          cloudsmith push go ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./libraries/go/common-lib/src/v${BUILD_VERSION}.zip
+          target_folders=$(find . -type f -name '*.mod' -exec dirname {} \;)
+
+          for dir_name in $target_folders; do
+              absolute_path=$(realpath "$dir_name")
+              modified_dir_name=${dir_name//\//-}
+              modified_dir_name=${modified_dir_name:2}
+              echo $modified_dir_name
+              (cd "$absolute_path" && cloudsmith push go ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ${modified_dir_name}-v${BUILD_VERSION}.zip)
+          done
