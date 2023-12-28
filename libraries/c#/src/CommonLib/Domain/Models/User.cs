@@ -5,12 +5,12 @@ namespace CommonLib.Domain.Models
 {
     public class User: IModel
     {
-        public Guid? userId { get; internal set; }
+        public Guid? userId { get; set; }
         public string? userName { get; set; }
         public string? userPassword { get; set; }
         public string? email { get; set; }
-        public DateTime? dateTimeCreated { get; internal set; }
-        public DateTime? dateTimeUpdated { get; internal set; }
+        public DateTime? dateTimeCreated { get; set; }
+        public DateTime? dateTimeUpdated { get; set; }
 
         /// <summary>
         /// Method for validating member attributes
