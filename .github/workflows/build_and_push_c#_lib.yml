@@ -33,7 +33,7 @@ jobs:
           sudo pip3 install --upgrade cloudsmith-cli
       - name: Push nuget package 📦 to CloudSmith. The uniqueness of the package version is essential. 
               # To achieve this, the Git run number will serve as the revision number. 
-              # (Specifically for development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
+              # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
         run: |
           export BUILD_VERSION="0.1.0-dev${{ github.run_number }}"
           cloudsmith push nuget ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./libraries/c#/src/CommonLib/bin/Release/CommonLib.${BUILD_VERSION}.nupkg
