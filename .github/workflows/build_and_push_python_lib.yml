@@ -39,7 +39,9 @@ jobs:
           snyk test --file=requirements.txt --command=python3 --orgs=${{ secrets.SNYK_ORGANIZATION_ID }} --severity-threshold=high
         working-directory: ./libraries/python/common-lib
       - name: Create pip package 📦
-        run: python setup.py bdist_wheel --version 0.1.0-dev${{ github.run_number }}
+        run: |
+          pip install wheel
+          python setup.py bdist_wheel --version 0.1.0-dev${{ github.run_number }}
         working-directory: ./libraries/python/common-lib
       - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
               # To achieve this, the Git run number will serve as the revision number. 
