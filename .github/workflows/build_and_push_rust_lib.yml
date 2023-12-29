@@ -23,8 +23,13 @@ jobs:
           cargo install cargo-audit
           cargo audit
         working-directory: ./libraries/rust/common-lib
+      - name: Create pip package 📦
+        run: |
+          cargo publish --dry-run
+          cargo package --list
+        working-directory: ./libraries/rust/common-lib
       - name: Push cargo package 📦 to CloudSmith. The uniqueness of the package version is essential. 
-              # To achieve this, the Git run number will serve as the revision number. 
-              # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
-        run: cloudsmith push cargo ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./dist/common_lib-0.1.0.dev${{ github.run_number }}-py3-none-any.whl
+        # In the context of Cargo and crates published on crates.io, there isn't a specific field or mechanism within Cargo.toml or 
+        # the Cargo ecosystem that directly corresponds to a "revision number" separate from the SemVer components (Major, Minor, Patch). 
+        run: cloudsmith push cargo ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./target/package/common_lib-0.1.0.crate
         working-directory: ./libraries/rust/common-lib
