@@ -58,7 +58,7 @@ jobs:
           sudo apt-get install -y python3 python3-pip
           sudo pip3 install --upgrade cloudsmith-cli
 
-      # Consider woking with git tags as proposed here: https://go.dev/doc/modules/publishing, https://go.dev/doc/modules/version-numbers
+      # When working with public go modules, consider utilizing git tags as proposed here: https://go.dev/doc/modules/publishing, https://go.dev/doc/modules/version-numbers
       # Difficult setup with CloudSmith in current directory setup. See: https://help.cloudsmith.io/docs/go-registry
       # - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
       #         # To achieve this, the Git run number will serve as the revision number. 
