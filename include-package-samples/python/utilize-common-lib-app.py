@@ -1,5 +1,8 @@
 # To leverage the functionalities offered by the common-lib pip package, access the 'Setup' view within the pip package and perform the following steps:
-# pip install --index-url=<> common-lib==0.1.0.dev9
+# 0. pip install --index-url=<> common-lib==0.1.0.dev9
+
+# In order to remove the pip package from the filesystem
+# 0. pip uninstall common-lib
 
 from datetime import datetime
 from domain.models.user import User
