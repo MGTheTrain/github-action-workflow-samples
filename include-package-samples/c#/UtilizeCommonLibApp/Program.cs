@@ -1,6 +1,10 @@
 ﻿using System;
 using CommonLib.Domain.Models;
 
+
+// To leverage the functionalities offered by the CommonLib .NET package, access the 'Setup' view within the NuGet package and perform the following steps:
+// 0. dotnet nuget add source --name <> --username <> --password <> --store-password-in-clear-text <>
+// 1. dotnet add package CommonLib -s <>
 class Program
 {
     static void Main()
