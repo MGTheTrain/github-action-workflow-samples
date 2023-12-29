@@ -1,0 +1,30 @@
+name: CI/CT workflow for Rust libraries packaged via cargo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ci-ct-job-for-rust-libraries:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Install Rust
+        run: |
+          sudo apt-get install -y curl build-essential
+          sudo curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        working-directory: ./libraries/rust/common-lib
+      - name: Run tests
+        run: |
+          cargo test
+        working-directory: ./libraries/rust/common-lib
+      - name: Run cargo-audit to check for vulnerabilities in the source code 🔍/🛡️
+        run: |
+          cargo install cargo-audit
+          cargo audit
+        working-directory: ./libraries/rust/common-lib
+      - name: Push cargo package 📦 to CloudSmith. The uniqueness of the package version is essential. 
+              # To achieve this, the Git run number will serve as the revision number. 
+              # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
+        run: cloudsmith push cargo ${{ secrets.CLOUDSMITH_REPOSITORY }} -k ${{ secrets.CLOUDSMITH_API_KEY }} ./dist/common_lib-0.1.0.dev${{ github.run_number }}-py3-none-any.whl
+        working-directory: ./libraries/rust/common-lib
