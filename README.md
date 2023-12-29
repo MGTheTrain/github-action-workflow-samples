@@ -27,6 +27,7 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 - [Upload Go package to CloudSmith](https://help.cloudsmith.io/docs/go-registry)
 - [Go -Publishing a module](https://go.dev/doc/modules/publishing)
 - [Go - Module version numbering](https://go.dev/doc/modules/version-numbers)
+- [Publishing on crates.io](https://doc.rust-lang.org/cargo/reference/publishing.html)
 
 ## How to use
 
