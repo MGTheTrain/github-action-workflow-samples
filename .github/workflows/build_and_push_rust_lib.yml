@@ -26,8 +26,14 @@ jobs:
       - name: Create pip package 📦
         run: |
           cargo publish --dry-run
+          echo "-------------------------------------------------------------------------------------------------------------------------------------------"
+          echo " Print files included in a package"
           cargo package --list
         working-directory: ./libraries/rust/common-lib
+      - name: Install CloudSmith dependencies
+        run: |
+          sudo apt-get install -y python3 python3-pip
+          sudo pip3 install --upgrade cloudsmith-cli
       - name: Push cargo package 📦 to CloudSmith. The uniqueness of the package version is essential. 
         # In the context of Cargo and crates published on crates.io, there isn't a specific field or mechanism within Cargo.toml or 
         # the Cargo ecosystem that directly corresponds to a "revision number" separate from the SemVer components (Major, Minor, Patch). 
