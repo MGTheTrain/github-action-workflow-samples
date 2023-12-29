@@ -2,6 +2,11 @@ use chrono::{DateTime, Utc};
 use uuid::Uuid;
 use common_lib::domain::models::user::User;
 
+// To leverage the functionalities offered by the common-lib cargo package, access the 'Setup' view within the cargo package and perform the following steps:
+// 0. Create a `.cargo/config.toml` file and add the index `<> = { index = "<>" }`
+// 1. Update the `Cargo.toml` file to include your dependency
+// 2. Build and run Rust app with `cargo run`
+
 fn main() {
     let user_id = Some(Uuid::new_v4());
     let user = User {
