@@ -51,6 +51,14 @@ Clicking on the provided links will direct you to the respective GitHub Action w
 
 [![CI/CT workflow for Rust Actix Web service docker image](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_backend_service.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_backend_service.yml)
 
+[![CI/CT workflow for C# libraries packaged via nuget](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_c%23_lib.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_c%23_lib.yml)
+
+[![CI/CT workflow for packaged Go libraries](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_go_lib.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_go_lib.yml)
+
+[![CI/CT workflow for Python libraries packaged via pip](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_python_lib.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_python_lib.yml)
+
+[![CI/CT workflow for Rust libraries packaged via cargo](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_lib.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_lib.yml)
+
 ### Results
 
 - ![Build artifacts in an Azure Container Registry](./images/build-artifacts-in-an-azure-container-registry.PNG)
