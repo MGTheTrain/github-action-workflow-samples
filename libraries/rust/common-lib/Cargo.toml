@@ -1,7 +1,19 @@
 [package]
-name = "common-lib"
+name = "common_lib"
 version = "0.1.0"
 edition = "2021"
+
+[lib]
+name = "common_lib"
+path = "src/lib.rs"
+
+[[test]]
+name = "test_domain_models"
+path = "test/test_domain_models.rs"
+
+[[test]]
+name = "test_web_dtos"
+path = "test/test_web_dtos.rs"
 
 [dependencies]
 validator = { version = "0.16.1", features = ["derive"] }

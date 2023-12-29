@@ -4,35 +4,35 @@ use serde::Deserialize;
 #[derive(Debug, Validate, Deserialize)]
 pub struct UserRequestDto {
     #[validate(required, length(max = 50))]
-    user_name: Option<String>,
+    pub user_name: Option<String>,
 
     #[validate(required, length(min = 10))]
-    user_password: Option<String>,
+    pub user_password: Option<String>,
 
     #[validate(required)]
-    email: Option<String>,
+    pub email: Option<String>,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// Prefer having tests decoupled from implementation for less file content
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     #[test]
+//     fn test_user_request_dto_validation() {
+//         let userRequestDto = UserRequestDto {
+//             user_name: Some("JohnDoe".to_string()),
+//             user_password: Some("password123".to_string()),
+//             email: Some("johndoe@example.com".to_string()),
+//         };
 
-    #[test]
-    fn test_user_request_dto_validation() {
-        let userRequestDto = UserRequestDto {
-            user_name: Some("JohnDoe".to_string()),
-            user_password: Some("password123".to_string()),
-            email: Some("johndoe@example.com".to_string()),
-        };
-
-        let validation_result = userRequestDto.validate();
-        match validation_result {
-            Ok(_) => {
-                println!("Validation succeeded!");
-            }
-            Err(errors) => {
-                println!("Validation errors: {:?}", errors);
-            }
-        }
-    }
-}
+//         let validation_result = userRequestDto.validate();
+//         match validation_result {
+//             Ok(_) => {
+//                 println!("Validation succeeded!");
+//             }
+//             Err(errors) => {
+//                 println!("Validation errors: {:?}", errors);
+//             }
+//         }
+//     }
+// }
