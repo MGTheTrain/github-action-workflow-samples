@@ -1,4 +1,4 @@
-name: CI/CT workflow for nuget packages
+name: CI/CT workflow for C# libraries packaged via nuget
 
 on:
   workflow_dispatch:

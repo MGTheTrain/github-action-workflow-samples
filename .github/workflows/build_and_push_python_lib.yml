@@ -1,4 +1,4 @@
-name: CI/CT workflow for pip packages
+name: CI/CT workflow for Python libraries packaged via pip
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: CI/CT workflow for Go packages
+name: CI/CT workflow for packaged Go libraries
 
 on:
   workflow_dispatch:
