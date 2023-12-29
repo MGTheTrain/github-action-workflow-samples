@@ -9,3 +9,4 @@ junit
 build
 dist
 common_lib.egg-info
+.cargo
