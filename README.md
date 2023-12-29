@@ -39,7 +39,7 @@ Setup a/an
 - [CloudSmith organization](https://cloudsmith.com/pricing) for uploading build artifacts
 - [Snyk organization](https://snyk.io/de/plans/) for vulnerability scanning
 
-### Run Github Action workflows
+### Github Action workflows
 
 Clicking on the provided links will direct you to the respective GitHub Action workflows:
 
@@ -58,6 +58,8 @@ Clicking on the provided links will direct you to the respective GitHub Action w
 [![CI/CT workflow for Python libraries packaged via pip](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_python_lib.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_python_lib.yml)
 
 [![CI/CT workflow for Rust libraries packaged via cargo](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_lib.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_lib.yml)
+
+With correct access you can manually start one of those.
 
 ### Results
 
