@@ -63,4 +63,6 @@ With correct access you can manually start one of those.
 
 ### Results
 
+#### Build artifacts in an Azure Container Registry pushed trough existing CI/CT workflows
+
 - ![Build artifacts in an Azure Container Registry](./images/build-artifacts-in-an-azure-container-registry.PNG)
