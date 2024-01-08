@@ -37,7 +37,7 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 Setup a/an 
 
 - [Azure Container registry](https://azure.microsoft.com/de-de/products/container-registry) for uploading build and tagged docker images
-- [CloudSmith organization](https://cloudsmith.com/pricing) for uploading build artifacts
+- [CloudSmith organization](https://cloudsmith.com/pricing) for uploading build artifacts (nuget, pip, cargo packages)
 - [Snyk organization](https://snyk.io/de/plans/) for vulnerability scanning
 
 ### Github Action workflows
