@@ -7,7 +7,6 @@
 - [How to use](#how-to-use)
   - [Perequisite](#perequisite)
   - [Run Github Action workflows](#run-github-action-workflows)
-  - [Results](#results)
 
 ## Summary
 
@@ -60,9 +59,3 @@ Clicking on the provided links will direct you to the respective GitHub Action w
 [![CI/CT workflow for Rust libraries packaged via cargo](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_lib.yml/badge.svg)](https://github.com/MGTheTrain/github-action-workflow-samples/actions/workflows/build_and_push_rust_lib.yml)
 
 With correct access you can manually start one of those.
-
-### Results
-
-#### Build artifacts in an Azure Container Registry pushed trough existing CI/CT workflows
-
-- ![Build artifacts in an Azure Container Registry](./images/build-artifacts-in-an-azure-container-registry.PNG)
