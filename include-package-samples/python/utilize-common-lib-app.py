@@ -1,4 +1,4 @@
-# To leverage the functionalities offered by the common-lib pip package, access the 'Setup' view for this pip package in CloudSmith and perform the following steps:
+# To leverage the functionalities offered by the common-lib pip package, access the 'Setup' view for it in CloudSmith and perform the following steps:
 # 0. pip install --index-url=<> common-lib==0.1.0.dev9
 # 1. Run python app with `python utilize-common-lib-app.py`
 

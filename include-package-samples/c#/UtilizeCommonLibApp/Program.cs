@@ -2,7 +2,7 @@
 using CommonLib.Domain.Models;
 
 
-// To leverage the functionalities offered by the CommonLib nuget package, access the 'Setup' view for this NuGet package in CloudSmith and perform the following steps:
+// To leverage the functionalities offered by the CommonLib nuget package, access the 'Setup' view for it in CloudSmith and perform the following steps:
 // 0. dotnet nuget add source --name <> --username <> --password <> --store-password-in-clear-text <> 
 // 1. dotnet add package CommonLib -v <package version, e.g. 0.1.0-dev12> -s <>
 // 2. Run the C# app with `dotnet run`
