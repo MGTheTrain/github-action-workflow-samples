@@ -1,6 +1,6 @@
 # To leverage the functionalities offered by the common-lib pip package, access the 'Setup' view for it in CloudSmith and perform the following steps:
 # 0. pip install --index-url=<> common-lib==0.1.0.dev9
-# 1. Run python app with `python utilize-common-lib-app.py`
+# 1. Run the python app with `python utilize-common-lib-app.py`
 
 # In order to remove the pip package from the filesystem
 # 0. pip uninstall common-lib
