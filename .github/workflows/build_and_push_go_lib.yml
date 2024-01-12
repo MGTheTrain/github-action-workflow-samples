@@ -59,7 +59,7 @@ jobs:
           sudo pip3 install --upgrade cloudsmith-cli
 
       # When working with public go modules, consider utilizing git tags as proposed here: https://go.dev/doc/modules/publishing, https://go.dev/doc/modules/version-numbers
-      # Difficult setup with CloudSmith in current directory setup. See: https://help.cloudsmith.io/docs/go-registry
+      # Difficult setup with CloudSmith in current folder structure for the go sample library. See: https://help.cloudsmith.io/docs/go-registry
       # - name: Push go modules package 📦 to CloudSmith. The uniqueness of the package version is essential. 
       #         # To achieve this, the Git run number will serve as the revision number. 
       #         # (Specifically development and quality assurance (QA) packages shall utilize revision numbers. Release packages not)
