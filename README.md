@@ -6,9 +6,7 @@
 
 - [Summary](#summary)
 - [References](#references)
-- [How to use](#how-to-use)
-  - [Perequisite](#perequisite)
-  - [Run Github Action workflows](#run-github-action-workflows)
+- [Getting started](#getting-started)
 
 ## Summary
 
@@ -30,9 +28,9 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 - [Go - Module version numbering](https://go.dev/doc/modules/version-numbers)
 - [Publishing on crates.io](https://doc.rust-lang.org/cargo/reference/publishing.html)
 
-## How to use
+## Getting started
 
-### Perequisite
+### Preconditions
 
 Setup a/an 
 
