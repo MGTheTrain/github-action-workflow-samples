@@ -20,7 +20,7 @@ A collection of Github Action workflow samples. For simplicity and to illustrate
 - [Building and testing Python](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python)
 - [Snyk Actions Github repository](https://github.com/snyk/actions)
 - [docker-login Action Github repository](https://github.com/Azure/docker-login)
-- [build-push-action Github repository](https://github.com/docker/build-push-action). This does not work with Snyk docker action for [Snyk Docker Action](https://github.com/snyk/actions/tree/master/docker)
+- [build-push-action Github repository](https://github.com/docker/build-push-action). This does not work with [Snyk Docker Action](https://github.com/snyk/actions/tree/master/docker)
 - [CloudSmith Action Github repository](https://github.com/cloudsmith-io/action)
 - [Automated versioning and package publishing using GitHub Actions](https://dotnetthoughts.net/automated-versioning-and-package-publishing-using-github-actions/)
 - [Upload Go package to CloudSmith](https://help.cloudsmith.io/docs/go-registry)
